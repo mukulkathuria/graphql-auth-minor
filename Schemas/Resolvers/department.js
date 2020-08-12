@@ -1,9 +1,14 @@
 const Users = require("../../Models/user");
 const resolver = {
-    Query:{
-        getDistDepart:async () =>{
-            return await Users.distinct("department");
-        }
-    }
-}
+  Query: {
+    getAllAdmin: async () => {
+      return await Users.find(
+        {
+          role: "Admin",
+        },
+        { username: "$username", department: "$department" }
+      );
+    },
+  },
+};
 module.exports = resolver;

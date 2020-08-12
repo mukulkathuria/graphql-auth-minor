@@ -16,7 +16,7 @@ const typeDefs = gql`
   type Query {
     hello: String
     getUser: CurrentUser
-    getDistDepart: [String]
+    getAllAdmin:[ groupDepart ]
   }
   type Mutation {
     createUser(
@@ -26,15 +26,19 @@ const typeDefs = gql`
       role: String!
     ): User
     loginUser(email: String!, password: String!): loginUser
-    requestforApproval(message:String!,department:String!): UserwithReq
-    requestReject(reqid:ID!) :UserwithReq
-    requestApproval(reqid:ID!): UserwithReq
+    requestforApproval(
+      message: String!
+      department: String!
+      username: String!
+    ): User
+    requestReject(reqid: ID!): User
+    requestApproval(reqid: ID!): User
   }
 `;
 
 const appolloserver = new ApolloServer({
   schema: makeExecutableSchema({
-    typeDefs: [typeDefs, Userdef,RequesDef],
+    typeDefs: [typeDefs, Userdef, RequesDef],
     resolvers,
   }),
   context: ({ req, res }) => ({ req, res }),

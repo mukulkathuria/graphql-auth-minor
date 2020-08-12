@@ -8,7 +8,7 @@ const genID = () =>{
 
 const resolver = {
   Mutation: {
-    requestforApproval: async (_, { message, department }, { req }) => {
+    requestforApproval: async (_, { message, department ,username}, { req }) => {
       const token = req.cookies["token"];
       const Validuser = await getUser(token);
 
@@ -20,7 +20,7 @@ const resolver = {
       const UniId = genID();
       try {
         await Users.findOneAndUpdate(
-          { role: "Admin", department: department },
+          { role: "Admin",department ,username},
           {
             $push: {
               "Requests.pending": {

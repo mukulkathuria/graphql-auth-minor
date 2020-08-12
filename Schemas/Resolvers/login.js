@@ -14,7 +14,7 @@ const resolver = {
       if (!user) return new Error("Not Authorized");
       const currentuser = await Users.findOne({ email: user.email });
       return {
-        currentUser: user,
+        currentUser: currentuser,
       };
     },
   },

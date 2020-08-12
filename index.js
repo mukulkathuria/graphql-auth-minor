@@ -9,7 +9,10 @@ require("dotenv").config();
 const app = express();
 app.use(cookieparser());
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app ,cors:{
+  credentials:true,
+  origin:"http://localhost:3000"
+} });
 
 //Connecting to mongoDB
 mongoose.connect(
